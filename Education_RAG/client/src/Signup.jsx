@@ -7,6 +7,7 @@ function Signup() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(''); // State to store error message
+    const [successMessage, setSuccessMessage] = useState('');
 
     // Function to handle form submission
     const handleSubmit = (e) => {
@@ -22,7 +23,15 @@ function Signup() {
         axios.post('http://localhost:3001/signup', { username, email, password })
             .then(result => {
                 console.log(result);
-                // Navigate to login or show success message
+                if(result.data.message === 'User created successfully.') {
+                    setSuccessMessage('Registration successful. Redirecting to login...');
+                    setTimeout(() => {
+                    window.location.href = '/login'; // Use navigate('/login') if you are using react-router-dom v6
+                    }, 3000); // Redirect after 3 seconds
+                } else {
+                    setError('Failed to register account.');
+                }
+                
             })
             .catch(err => {
                 console.log(err);
@@ -48,6 +57,7 @@ function Signup() {
                 </div>
                 <button type="submit">Sign Up</button>
                 {error && <div className="error-message">{error}</div>}
+                {successMessage && <div className="success-message">{successMessage}</div>}
                 <p className="login-link">
                     Already have an account? <a href="/login">Log in</a>
                 </p>

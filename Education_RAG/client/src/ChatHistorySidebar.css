@@ -1,0 +1,7 @@
+.chat-history-sidebar {
+    width: 10%;
+    height: 100vh; /* Full height of the viewport */
+    background-color: lightgrey; /* Light grey background */
+    padding: 10px;
+    overflow-y: auto; /* Enable scrolling for overflow content */
+  }

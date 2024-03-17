@@ -16,7 +16,8 @@ function Login() {
         axios.post('http://localhost:3001/login', { email, password })
             .then(result => {
                 if (result.data.message === "Success") {
-                    navigate('/home');
+                    localStorage.setItem('token', result.data.token); // Store the token
+                    navigate('/chat');
                 } else {
                     // Set error message from server response
                     setErrorMessage(result.data.message);
