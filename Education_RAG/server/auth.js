@@ -8,10 +8,11 @@ function verifyToken(req, res, next) {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.userId = decoded.userId;
+    // Assuming the email is in the decoded token
+    req.email = decoded.email;
     next();
   } catch (err) {
-    return res.status(403).json({ message: "Invalid Token" });
+    return res.status(403).json({ message: "Invalid Token." });
   }
 }
 

@@ -1,7 +1,21 @@
 .chat-history-sidebar {
-    width: 10%;
-    height: 100vh; /* Full height of the viewport */
-    background-color: lightgrey; /* Light grey background */
-    padding: 10px;
-    overflow-y: auto; /* Enable scrolling for overflow content */
-  }
+  width: 15%; /* Adjusted for visibility */
+  height: 100vh;
+  padding: 10px;
+  overflow-y: auto;
+  border: 2px solid transparent; /* Default border set to transparent */
+}
+
+/* Light Theme */
+.light-theme .chat-history-sidebar {
+  background-color: #ccc; /* Light grey background for the light theme */
+  color: #000; /* Default dark text color for light theme */
+  border-color: #f5f5f5; /* Border color set to black */
+}
+
+/* Dark Theme */
+.dark-theme .chat-history-sidebar {
+  background-color: #111; /* Darker background for the dark theme */
+  color: #fff; /* White text color for dark theme */
+  border-color: black; /* Border color set to black */
+}

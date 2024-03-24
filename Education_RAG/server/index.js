@@ -13,6 +13,7 @@ app.use(express.json())
 app.use(cors())
 
 mongoose.connect("mongodb+srv://plazarek:AjBjyBowQlMUgYxr@cluster0.xnjfdga.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
+//mongoose.connect("mongodb+srv://madhavpuri100:@cluster0.xnjfdga.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
 
 app.post('/signup', async (req, res) => {
     const { email, password } = req.body;
@@ -49,15 +50,70 @@ app.post('/login', async (req, res) => {
 
         const isPasswordCorrect = await bcrypt.compare(password, user.password);
         if (!isPasswordCorrect) {
-            return res.status(401).json({ message: "The password is incorrect" });
+            return res.status(401).json({ message: "The password is incorrect." });
         }
 
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '5m' });
+        // Include user's email in the token
+        const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '5m' });
 
         res.json({ message: "Success", token });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ message: "Server error" });
+        res.status(500).json({ message: "Server error." });
+    }
+});
+
+app.get('/get-user-id', verifyToken, async (req, res) => {
+    const email = req.email; // Extracted from the token in `verifyToken` middleware
+
+    try {
+        const user = await UserModel.findOne({ email: email }).select('_id');
+        if (!user) {
+            return res.status(404).json({ message: "User not found." });
+        }
+
+        res.json({ userId: user._id });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Error fetching user ID." });
+    }
+});
+
+app.post('/update-settings', verifyToken, async (req, res) => {
+    const { userId, settings } = req.body;
+
+    console.log(userId, settings)
+
+    try {
+        // Update user settings based on the provided userId
+        const updatedUser = await UserModel.findByIdAndUpdate(userId, {
+            $set: { "settings": settings }
+        }, { new: true });
+
+        if (!updatedUser) {
+            return res.status(404).json({ message: "User not found." });
+        }
+
+        res.json({ message: "Settings updated successfully." });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Error updating settings." });
+    }
+});
+
+app.get('/get-user-settings', verifyToken, async (req, res) => {
+    const email = req.email; // Extracted from the token in `verifyToken` middleware
+
+    try {
+        const user = await UserModel.findOne({ email: email }, 'settings');
+        if (!user) {
+            return res.status(404).json({ message: "User not found." });
+        }
+
+        res.json({ settings: user.settings });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Error fetching user settings." });
     }
 });
 

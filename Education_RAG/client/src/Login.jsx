@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css'; // Ensure it contains .error-message styles
 import { useNavigate } from "react-router-dom";
+import { useTheme } from './ThemeContext'; 
 import axios from 'axios';
 
 function Login() {
@@ -8,16 +9,31 @@ function Login() {
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState(''); // New state for error messages
     const navigate = useNavigate();
+    const { setTheme } = useTheme();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrorMessage(''); // Clear previous error messages
-
+    
         axios.post('http://localhost:3001/login', { email, password })
             .then(result => {
                 if (result.data.message === "Success") {
-                    localStorage.setItem('token', result.data.token); // Store the token
-                    navigate('/chat');
+                    const { token } = result.data;
+                    localStorage.setItem('token', token); // Store the token
+    
+                    // Fetch user settings after successful login
+                    axios.get('http://localhost:3001/get-user-settings', {
+                      headers: { 'Authorization': `Bearer ${token}` }
+                    })
+                    .then(settingsResult => {
+                      const { colorTheme } = settingsResult.data.settings;
+                      setTheme(colorTheme); // Update the theme globally
+                      navigate('/chat'); // Navigate to chat after setting the theme
+                    })
+                    .catch(settingsError => {
+                      console.error("Error fetching user settings:", settingsError);
+                      navigate('/chat'); // Optional: Navigate to chat even if fetching settings fails
+                    });
                 } else {
                     // Set error message from server response
                     setErrorMessage(result.data.message);

@@ -2,10 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ChatHistorySidebar from './ChatHistorySidebar'; // Assuming this component exists
 import './Chat.css';
+import axios from 'axios'
+import UserSettings from './UserSettings';
+import { useTheme } from './ThemeContext';
 
 export default function Chat() {
   const [newMessageText, setNewMessageText] = useState('');
+  const [showSettings, setShowSettings] = useState(false);
   const navigate = useNavigate();
+  const { theme } = useTheme(); // Correctly using theme from context
 
   const sendMessage = (e) => {
     e.preventDefault();
@@ -43,27 +48,34 @@ export default function Chat() {
     return () => clearTimeout(timer);
 }, [navigate]);
 
-  return (
-    <div className="chat-page-container">
-      <ChatHistorySidebar />
-      <div className="chat-content">
-        <header className="chat-header">
-          <button onClick={handleLogout} className="logout-button">Logout</button>
-        </header>
-        <div className="messages-container">
-          {/* Messages will dynamically be inserted here */}
-        </div>
-        <form onSubmit={sendMessage} className="message-form">
-          <input
-            type="text"
-            className="message-input"
-            value={newMessageText}
-            onChange={(e) => setNewMessageText(e.target.value)}
-            placeholder="Type a message"
-          />
-          <button type="submit" className="send-button">Send</button>
-        </form>
+return (
+  <div className={`chat-page-container ${theme}-theme`}>
+    <ChatHistorySidebar />
+    <div className="chat-content">
+      <header className="chat-header">
+        <div className="header-spacer"></div> {/* This div acts as a spacer */}
+        <div className="header-spacer"></div> {/* This div acts as a spacer */}
+        <div className="header-spacer"></div> {/* This div acts as a spacer */}
+        <div className="header-spacer"></div> {/* This div acts as a spacer */}
+        <button onClick={() => navigate('/faq')} className="faq-button">Go to FAQ</button>
+        <button onClick={() => setShowSettings(true)} className="settings-button">Settings</button>
+        <button onClick={handleLogout} className="logout-button">Logout</button>
+      </header>
+      <div className="messages-container">
+        {/* Messages will dynamically be inserted here */}
       </div>
+      <form onSubmit={sendMessage} className="message-form">
+        <input
+          type="text"
+          className="message-input"
+          value={newMessageText}
+          onChange={(e) => setNewMessageText(e.target.value)}
+          placeholder="Type a message"
+        />
+        <button type="submit" className="send-button">Send</button>
+      </form>
     </div>
-  );
+    {showSettings && <UserSettings onClose={() => setShowSettings(false)} />}
+  </div>
+);
 }
