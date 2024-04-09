@@ -6,10 +6,11 @@ const UserModel = require('../models/Users');
 
 const bcrypt = require('bcryptjs');
 
-
+test('adds 1 + 2 to equal 3', () => {
+  expect(1 + 2).toBe(3);
+});
 
 describe('User Registration', () => {
-
     // Clear the database before running tests
 
     beforeAll(async () => {
@@ -26,17 +27,11 @@ describe('User Registration', () => {
 
             .post('/signup')
 
-            .set('Content-Type', 'application/x-www-form-urlencoded')
-
             .send({ email: 'test@example.com', password: 'testpassword' });
-
-
 
         expect(res.statusCode).toEqual(201);
 
         expect(res.body).toHaveProperty('message', 'User created successfully.');
-
-
 
         // Check if the user is actually saved in the database
 
