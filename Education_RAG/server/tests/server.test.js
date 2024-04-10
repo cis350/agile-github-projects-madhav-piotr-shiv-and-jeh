@@ -1,6 +1,6 @@
 const request = require('supertest');
 
-const app = require('../index'); // Assuming your index.js is in the parent directory
+const app = require('../server'); // Assuming your index.js is in the parent directory
 
 const UserModel = require('../models/Users');
 
