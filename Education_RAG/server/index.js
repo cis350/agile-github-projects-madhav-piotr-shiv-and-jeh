@@ -11,8 +11,12 @@ const webapp = require('./server');
 const port = process.env.PORT || 3001;
 const host = '0.0.0.0';
 
-webapp.listen(port, host, async () => {
+const server = webapp.listen(port, host, async (err) => {
+  if (err) {
+    console.error('Server failed to start:', err);
+    return;
+  }
   console.log(`Server running on port: ${port}`);
 });
 
-module.exports = webapp;
+module.exports = server;
