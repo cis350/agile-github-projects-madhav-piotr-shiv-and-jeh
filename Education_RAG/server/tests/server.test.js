@@ -153,4 +153,42 @@ describe('User Login', () => {
 
     });
 
+    it('should retrieve user settings for a valid user', async () => {
+        await request(app)
+            .post('/signup')
+            .send({ email: 'settingsuser@example.com', password: 'password123' });
+    
+        const loginRes = await request(app)
+            .post('/login')
+            .send({ email: 'settingsuser@example.com', password: 'password123' });
+    
+        const token = loginRes.body.token;
+
+        const res = await request(app)
+            .get('/get-user-settings')
+            .set('Authorization', `Bearer ${token}`);
+    
+        expect(res.statusCode).toEqual(200);
+        expect(res.body).toHaveProperty('settings');
+    });
+
+    it('should return 404 if user does not exist', async () => {
+        await request(app)
+            .post('/signup')
+            .send({ email: 'tempuser@example.com', password: 'tempPassword123' });
+
+        const loginRes = await request(app)
+            .post('/login')
+            .send({ email: 'tempuser@example.com', password: 'tempPassword123' });
+
+        const token = loginRes.body.token;
+        await UserModel.deleteOne({ email: 'tempuser@example.com' });
+        const res = await request(app)
+            .get('/get-user-settings')
+            .set('Authorization', `Bearer ${token}`);
+
+        expect(res.statusCode).toEqual(404);
+        expect(res.body).toHaveProperty('message', 'User not found.');
+    });
+
 });

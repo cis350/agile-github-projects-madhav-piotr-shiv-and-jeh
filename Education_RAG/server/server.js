@@ -123,6 +123,7 @@ app.get('/protected-route', verifyToken, (req, res) => {
     res.json({ message: "This is protected data." });
 });
 
+
 /**app.listen(3001, () => {
     console.log("server is running");
 })*/
