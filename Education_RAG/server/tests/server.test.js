@@ -135,6 +135,25 @@ describe('User Login', () => {
 
     });
 
+    it('should retrieve user ID for a valid user', async () => {
+        await request(app)
+            .post('/signup')
+            .send({ email: 'useriduser@example.com', password: 'password123' });
+
+        const loginRes = await request(app)
+            .post('/login')
+            .send({ email: 'useriduser@example.com', password: 'password123' });
+    
+        const token = loginRes.body.token;
+    
+        const res = await request(app)
+            .get('/get-user-id')
+            .set('Authorization', `Bearer ${token}`);
+    
+        expect(res.statusCode).toEqual(200);
+        expect(res.body).toHaveProperty('userId');
+    });
+
 
 
     it('should return an error with non-existent email', async () => {
@@ -222,6 +241,8 @@ describe('User Login', () => {
             expect(res.statusCode).toEqual(200);
             expect(res.body).toHaveProperty('message', 'Settings updated successfully.');
         });
+
+        
 
         afterAll(async () => {
             await UserModel.deleteMany({});
