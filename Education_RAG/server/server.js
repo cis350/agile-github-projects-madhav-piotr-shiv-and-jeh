@@ -124,6 +124,7 @@ app.get('/protected-route', verifyToken, (req, res) => {
 });
 
 
+
 /**app.listen(3001, () => {
     console.log("server is running");
 })*/

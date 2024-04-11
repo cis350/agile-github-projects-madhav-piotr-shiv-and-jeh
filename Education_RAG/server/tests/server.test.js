@@ -191,4 +191,41 @@ describe('User Login', () => {
         expect(res.body).toHaveProperty('message', 'User not found.');
     });
 
+
+    describe('Update User Settings', () => {
+        let userToken;
+        let userId;
+    
+        beforeAll(async () => {
+            await request(app)
+                .post('/signup')
+                .send({ email: 'testuser@example.com', password: 'testpassword' });
+    
+            const loginRes = await request(app)
+                .post('/login')
+                .send({ email: 'testuser@example.com', password: 'testpassword' });
+    
+            userToken = loginRes.body.token;
+    
+            const user = await UserModel.findOne({ email: 'testuser@example.com' });
+            userId = user._id;
+        });
+    
+        it('should successfully update user settings', async () => {
+            const newSettings = { theme: 'dark', language: 'en' };
+    
+            const res = await request(app)
+                .post('/update-settings')
+                .set('Authorization', `Bearer ${userToken}`)
+                .send({ userId: userId, settings: newSettings });
+    
+            expect(res.statusCode).toEqual(200);
+            expect(res.body).toHaveProperty('message', 'Settings updated successfully.');
+        });
+
+        afterAll(async () => {
+            await UserModel.deleteMany({});
+        });
+    });
+
 });

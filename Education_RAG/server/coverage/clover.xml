@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1712782129209" clover="3.2.0">
-  <project timestamp="1712782129209" name="All files">
-    <metrics statements="83" coveredstatements="58" conditionals="18" coveredconditionals="13" methods="7" coveredmethods="4" elements="108" coveredelements="75" complexity="0" loc="83" ncloc="83" packages="2" files="3" classes="3"/>
+<coverage generated="1712813307755" clover="3.2.0">
+  <project timestamp="1712813307755" name="All files">
+    <metrics statements="83" coveredstatements="64" conditionals="18" coveredconditionals="14" methods="7" coveredmethods="5" elements="108" coveredelements="83" complexity="0" loc="83" ncloc="83" packages="2" files="3" classes="3"/>
     <package name="server">
-      <metrics statements="79" coveredstatements="54" conditionals="18" coveredconditionals="13" methods="7" coveredmethods="4"/>
+      <metrics statements="79" coveredstatements="60" conditionals="18" coveredconditionals="14" methods="7" coveredmethods="5"/>
       <file name="auth.js" path="/Users/shivkarnani/Desktop/agile-github-projects-madhav-piotr-shiv-and-jeh/Education_RAG/server/auth.js">
         <metrics statements="10" coveredstatements="9" conditionals="4" coveredconditionals="3" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
-        <line num="4" count="2" type="stmt"/>
-        <line num="5" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="7" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="9" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
-        <line num="13" count="2" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="7" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
         <line num="19" count="1" type="stmt"/>
       </file>
       <file name="server.js" path="/Users/shivkarnani/Desktop/agile-github-projects-madhav-piotr-shiv-and-jeh/Education_RAG/server/server.js">
-        <metrics statements="69" coveredstatements="45" conditionals="14" coveredconditionals="10" methods="6" coveredmethods="3"/>
+        <metrics statements="69" coveredstatements="51" conditionals="14" coveredconditionals="11" methods="6" coveredmethods="4"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -32,29 +32,29 @@
         <line num="13" count="1" type="stmt"/>
         <line num="17" count="1" type="stmt"/>
         <line num="19" count="1" type="stmt"/>
-        <line num="20" count="5" type="stmt"/>
-        <line num="22" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="20" count="6" type="stmt"/>
+        <line num="22" count="6" type="cond" truecount="2" falsecount="0"/>
         <line num="23" count="1" type="stmt"/>
-        <line num="26" count="4" type="stmt"/>
-        <line num="27" count="4" type="stmt"/>
-        <line num="28" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="26" count="5" type="stmt"/>
+        <line num="27" count="5" type="stmt"/>
+        <line num="28" count="5" type="cond" truecount="2" falsecount="0"/>
         <line num="29" count="1" type="stmt"/>
-        <line num="32" count="3" type="stmt"/>
-        <line num="34" count="3" type="stmt"/>
-        <line num="36" count="3" type="stmt"/>
+        <line num="32" count="4" type="stmt"/>
+        <line num="34" count="4" type="stmt"/>
+        <line num="36" count="4" type="stmt"/>
         <line num="38" count="0" type="stmt"/>
         <line num="39" count="0" type="stmt"/>
         <line num="43" count="1" type="stmt"/>
-        <line num="44" count="5" type="stmt"/>
-        <line num="46" count="5" type="stmt"/>
-        <line num="47" count="5" type="stmt"/>
-        <line num="48" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="44" count="6" type="stmt"/>
+        <line num="46" count="6" type="stmt"/>
+        <line num="47" count="6" type="stmt"/>
+        <line num="48" count="6" type="cond" truecount="2" falsecount="0"/>
         <line num="49" count="1" type="stmt"/>
-        <line num="52" count="4" type="stmt"/>
-        <line num="53" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="52" count="5" type="stmt"/>
+        <line num="53" count="5" type="cond" truecount="2" falsecount="0"/>
         <line num="54" count="1" type="stmt"/>
-        <line num="58" count="3" type="stmt"/>
-        <line num="60" count="3" type="stmt"/>
+        <line num="58" count="4" type="stmt"/>
+        <line num="60" count="4" type="stmt"/>
         <line num="62" count="0" type="stmt"/>
         <line num="63" count="0" type="stmt"/>
         <line num="67" count="1" type="stmt"/>
@@ -67,13 +67,13 @@
         <line num="78" count="0" type="stmt"/>
         <line num="79" count="0" type="stmt"/>
         <line num="83" count="1" type="stmt"/>
-        <line num="84" count="0" type="stmt"/>
-        <line num="86" count="0" type="stmt"/>
-        <line num="88" count="0" type="stmt"/>
-        <line num="90" count="0" type="stmt"/>
-        <line num="94" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="86" count="1" type="stmt"/>
+        <line num="88" count="1" type="stmt"/>
+        <line num="90" count="1" type="stmt"/>
+        <line num="94" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="95" count="0" type="stmt"/>
-        <line num="98" count="0" type="stmt"/>
+        <line num="98" count="1" type="stmt"/>
         <line num="100" count="0" type="stmt"/>
         <line num="101" count="0" type="stmt"/>
         <line num="105" count="1" type="stmt"/>
@@ -87,7 +87,7 @@
         <line num="117" count="0" type="stmt"/>
         <line num="121" count="1" type="stmt"/>
         <line num="123" count="0" type="stmt"/>
-        <line num="131" count="1" type="stmt"/>
+        <line num="132" count="1" type="stmt"/>
       </file>
     </package>
     <package name="server.models">
